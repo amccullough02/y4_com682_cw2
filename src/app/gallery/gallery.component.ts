@@ -10,5 +10,10 @@ import { WebService } from '../web.service';
   templateUrl: './gallery.component.html',
 })
 export class GalleryComponent {
-  
+  constructor(private webService: WebService) {}
+  ngOnInit() {
+    this.webService.getMedia().subscribe((response) => {
+      console.log(response);
+    });
+  }
 }
