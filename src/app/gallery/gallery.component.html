@@ -1,23 +1,18 @@
 <div class="container" style="margin-top: 70px">
   <div class="row">
-    <div class="col-sm-12">
-      @for (media of media_items; track media.id) {
-      <div class="card mb-3">
-        <div class="card-header">ID: {{ media.id }}</div>
-        <div class="card-body">
-          Description: {{ media.description.$content }}
-        </div>
-        <div class="card-body">
-          <img
-            [src]="
-              'https://cnativeblobmedia.blob.core.windows.net' + media.filePath
-            "
-            style="height: 200px"
-          />
-        </div>
-        <div class="card-footer">Category: {{ media.category.$content }}</div>
+    <div class="col-md-3" *ngFor="let media of media_items">
+      <div class="card mb-4">
+        <div class="card-header">{{ decodeB64(media.fileName.$content) }}</div>
+        <img
+          [src]="
+            'https://cnativeblobmedia.blob.core.windows.net' + media.filePath
+          "
+          style="height: 200px"
+          class="card-img-top"
+          [routerLink]="['/gallery', media.id]"
+        />
+        <div class="card-footer">By {{ decodeB64(media.userName.$content) }}</div>
       </div>
-      }
     </div>
   </div>
 </div>

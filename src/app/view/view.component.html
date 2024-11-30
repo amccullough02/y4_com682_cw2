@@ -1,0 +1,26 @@
+<div class="container" style="margin-top: 70px">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>{{ decodeB64(media_data.fileName.$content) }}</h1>
+      <img
+        [src]="
+          'https://cnativeblobmedia.blob.core.windows.net' + media_data.filePath
+        "
+      />
+      <p>{{ decodeB64(media_data.description.$content) }}</p>
+      <p>
+        <strong>Category:</strong> {{ decodeB64(media_data.category.$content) }}
+      </p>
+      <p>
+        <strong>Uploaded by:</strong>
+        {{ decodeB64(media_data.userName.$content) }}
+      </p>
+      <a
+        (click)="onDelete()"
+        class="btn btn-danger"
+        style="margin-top: 20px; cursor: pointer"
+        >Delete</a
+      >
+    </div>
+  </div>
+</div>
