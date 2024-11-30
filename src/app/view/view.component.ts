@@ -5,7 +5,6 @@ import { WebService } from '../web.service';
 @Component({
   selector: 'home-page',
   standalone: true,
-  imports: [RouterOutlet],
   providers: [WebService],
   templateUrl: './view.component.html',
 })

@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'upload',
   standalone: true,
-  imports: [RouterOutlet, ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule],
   providers: [WebService],
   templateUrl: './upload.component.html',
 })

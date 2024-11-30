@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'gallery',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule],
   providers: [WebService],
   templateUrl: './gallery.component.html',
 })
