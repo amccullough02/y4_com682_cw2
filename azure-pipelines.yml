@@ -43,6 +43,7 @@ steps:
 # Deploy to Azure Web App
 - task: AzureWebApp@1
   inputs:
+    azureSubscription: ''
     appType: 'webApp'
     appName: 'stellarsight'
     package: '$(Build.ArtifactStagingDirectory)/angular-app.zip'
