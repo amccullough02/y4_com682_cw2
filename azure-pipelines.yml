@@ -1,22 +1,50 @@
-# Node.js with Angular
-# Build a Node.js project that uses Angular.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
 - main
 
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  buildConfiguration: 'production'
+  angularOutputPath: 'dist' # Default Angular build output directory
+
 steps:
+# Install Node.js
 - task: NodeTool@0
   inputs:
     versionSpec: '20.x'
   displayName: 'Install Node.js'
 
+# Install Angular CLI and dependencies, then build
 - script: |
     npm install -g @angular/cli
     npm install
-    ng build --configuration production
-  displayName: 'npm install and build'
+    ng build --configuration $(buildConfiguration)
+  displayName: 'Install dependencies and build Angular app'
+
+# Archive the Angular build output for deployment
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/$(angularOutputPath)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/angular-app.zip'
+    replaceExistingArchive: true
+  displayName: 'Archive Angular build output'
+
+# Publish build artifact
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'angular-app'
+    publishLocation: 'Container'
+  displayName: 'Publish build artifacts'
+
+# Deploy to Azure Web App
+- task: AzureWebApp@1
+  inputs:
+    appType: 'webApp'
+    appName: 'ASP-cnativerg-bad4'
+    package: '$(Build.ArtifactStagingDirectory)/angular-app.zip'
+    deploymentMethod: 'auto'
+  displayName: 'Deploy to Azure Web App'
