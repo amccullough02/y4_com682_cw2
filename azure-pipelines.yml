@@ -44,7 +44,7 @@ steps:
 - task: AzureWebApp@1
   inputs:
     appType: 'webApp'
-    appName: 'ASP-cnativerg-bad4'
+    appName: 'stellarsight'
     package: '$(Build.ArtifactStagingDirectory)/angular-app.zip'
     deploymentMethod: 'auto'
   displayName: 'Deploy to Azure Web App'
