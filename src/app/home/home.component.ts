@@ -8,7 +8,7 @@ import * as WebChat from 'botframework-webchat';
 })
 export class HomeComponent {
   ngOnInit() {
-    const directLineSecret = environment.directLineSecret;
+    const directLineSecret = 'Uubzxr3QsmU.hU4OoiCw60fYTZRjeeFO8rkue8p37TCtv2XraCQCKg8';
     const directLine = WebChat.createDirectLine({
       secret: directLineSecret,
     });
