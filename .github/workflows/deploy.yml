@@ -26,13 +26,13 @@ jobs:
 
       - name: Inject Direct Line Secret into Angular environment
         run: |
-          echo "export const environment = { production: true, directLineSecret: '${{ secrets.DIRECT_LINE_SECRET }}' };" > src/environments/environment.prod.ts
+          echo "export const environment = { production: false, directLineSecret: '${{ secrets.DIRECT_LINE_SECRET }}' };" > src/environments/environment.ts
 
       - name: Install Angular CLI
         run: npm install -g @angular/cli
 
       - name: Build Angular App
-        run: ng build --configuration production
+        run: ng build
 
       - name: Create Web.config
         run: |
