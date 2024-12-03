@@ -21,6 +21,10 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Inject Direct Line Secret into Angular environment
+        run: |
+          echo "export const environment = { production: false, directLineSecret: '${{ secrets.DIRECT_LINE_SECRET }}' };" > src/environments/environment.ts
+
       - name: Build Angular App
         run: npm run build
 
@@ -50,8 +54,6 @@ jobs:
           EOL
 
       - name: Deploy to Azure Web App
-        env:
-          DIRECT_LINE_SECRET: ${{ secrets.DIRECT_LINE_SECRET }}
         uses: azure/webapps-deploy@v2
         with:
           app-name: stellarsight

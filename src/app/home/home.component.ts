@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import * as WebChat from 'botframework-webchat';
+import { environment } from '../../environment/environment';
 
 @Component({
   selector: 'home-page',
@@ -8,9 +9,9 @@ import * as WebChat from 'botframework-webchat';
 })
 export class HomeComponent {
   ngOnInit() {
-    const directLineSecret = process.env['DIRECT_LINE_SECRET']
+    const directLineSecret = environment.directLineSecret;
     const directLine = WebChat.createDirectLine({
-      secret: directLineSecret
+      secret: directLineSecret,
     });
 
     WebChat.renderWebChat(
