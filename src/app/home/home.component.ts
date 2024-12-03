@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import * as WebChat from 'botframework-webchat';
-import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'home-page',
