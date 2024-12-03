@@ -21,12 +21,18 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Verify environments directory
+        run: mkdir -p src/environments
+
       - name: Inject Direct Line Secret into Angular environment
         run: |
-          echo "export const environment = { production: false, directLineSecret: '${{ secrets.DIRECT_LINE_SECRET }}' };" > src/environments/environment.ts
+          echo "export const environment = { production: true, directLineSecret: '${{ secrets.DIRECT_LINE_SECRET }}' };" > src/environments/environment.prod.ts
+
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
 
       - name: Build Angular App
-        run: npm run build
+        run: ng build --configuration production
 
       - name: Create Web.config
         run: |
