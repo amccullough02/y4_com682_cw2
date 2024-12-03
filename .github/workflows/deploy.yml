@@ -22,7 +22,12 @@ jobs:
         run: npm install
 
       - name: Build Angular App
-        run: npm run build
+        run: |
+          set -e
+          npm run build
+
+      - name: Ensure Browser Directory Exists
+        run: mkdir -p ./dist/stellarsight/browser
 
       - name: Create Web.config
         run: |
